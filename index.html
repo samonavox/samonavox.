@@ -1,0 +1,658 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Портфолио Анастасии Самсоновой</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: чёрная сцена; надувной hero со sticky-скроллом → три отклонённые карточки кейсов → продуктовая корзина с брендами → светофор навыков → футер в три колонки */
+:root{
+  --bg:#000;
+  --line:rgba(236,240,255,.12);
+  --text:#f3f4f8;
+  --mute:#8a8fa0;
+  --blue:#2f50ff;
+  --blue-hi:#8ea0ff;
+  --red:#ff3d52;
+  --amber:#ffb21e;
+  --green:#2ee07f;
+  --lime:#d8ff3c;
+  --pink:#ffb3cf;
+  --paper:#f7f7f4;
+  --ink:#0b0c10;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-serif:"Cormorant Garamond","Times New Roman",Georgia,serif;
+  --nav-h:68px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:2px solid var(--blue-hi);outline-offset:3px;border-radius:6px}
+
+/* ---------- NAV ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+.nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;background:linear-gradient(to bottom,rgba(0,0,0,.85),rgba(0,0,0,0))}
+.nav .wrap{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-weight:700;font-size:15px;letter-spacing:-.01em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.nav ul{display:flex;gap:44px;list-style:none;margin:0;padding:0;font-size:14px}
+.nav ul a{text-decoration:none;opacity:.85;transition:opacity .2s}
+.nav ul a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border:0;border-radius:8px;padding:10px 20px;font:500 14px/1 var(--f-body);text-decoration:none;cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{background:#4562ff;transform:translateY(-1px)}
+
+/* ---------- HERO ---------- */
+.hero{height:320vh;position:relative}
+.hero-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#000}
+.hero-poster,.hero-canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.hero-poster{object-fit:cover}
+.hero-canvas{opacity:0;transition:opacity .3s}
+.hero-canvas.ready{opacity:1}
+@media (max-aspect-ratio:1/1){.hero-poster{object-fit:contain;transform:scale(1.5)}}
+.tagline{position:absolute;left:50%;bottom:10vh;transform:translateX(-50%);text-align:center;font-size:15px;font-weight:400;line-height:1.4;width:max-content;max-width:calc(100% - 32px);z-index:2;text-shadow:0 2px 18px rgba(0,0,0,.9)}
+.hero-meta{position:absolute;bottom:max(24px,env(safe-area-inset-bottom,0px));left:0;right:0;z-index:2}
+.hero-meta .wrap{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);letter-spacing:.04em;text-transform:uppercase}
+
+/* ---------- SECTION HEADS ---------- */
+.sec{padding-block:120px}
+.sec-head{display:grid;gap:14px;margin-bottom:64px;max-width:720px}
+.eyebrow{font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-hi)}
+.sec-head h2{font-size:clamp(34px,5vw,64px);font-weight:700;line-height:1;letter-spacing:-.035em}
+.sec-head p{color:var(--mute);max-width:52ch}
+
+/* ---------- CASES: три отклонённые карточки ---------- */
+.cases-row{display:grid;gap:28px;perspective:1400px;perspective-origin:50% 30%;padding-block:20px 40px}
+.case{position:relative;display:block;text-decoration:none;color:#fff;outline:none}
+.card{position:relative;aspect-ratio:3/4;border-radius:22px;overflow:hidden;background:var(--cbg);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.2,.85,.2,1),box-shadow .8s;box-shadow:0 30px 60px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06)}
+.case:nth-child(1) .card{transform:rotateX(16deg) rotateY(24deg) translateZ(-40px)}
+.case:nth-child(2) .card{transform:rotateX(22deg) translateZ(-10px)}
+.case:nth-child(3) .card{transform:rotateX(16deg) rotateY(-24deg) translateZ(-40px)}
+.case:hover .card,.case:focus-visible .card{transform:rotateX(0) rotateY(0) translateY(-22px) translateZ(40px);box-shadow:0 50px 90px -30px rgba(47,80,255,.55),0 0 0 1px rgba(255,255,255,.12)}
+.case::after{content:"";position:absolute;left:10%;right:10%;bottom:-18px;height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(47,80,255,.35),transparent);filter:blur(10px);transition:opacity .8s,transform .8s}
+.case:hover::after{opacity:.5;transform:scale(.8) translateY(14px)}
+.scene{position:absolute;inset:0;overflow:hidden}
+.card-chip{position:absolute;top:18px;left:18px;z-index:3;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:6px;background:rgba(10,12,20,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.card-foot{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:22px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;background:linear-gradient(to top,rgba(0,0,0,.65),transparent)}
+.card-foot h3{white-space:nowrap;font-size:clamp(24px,2.3vw,34px);font-weight:500;line-height:1;letter-spacing:-.035em}
+.card-foot p{font-size:11px;line-height:1.35;color:rgba(255,255,255,.7);max-width:17ch;text-align:right}
+.case-meta{margin-top:26px;display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--mute);border-top:1px solid var(--line);padding-top:14px}
+.case-meta b{color:var(--text);font-weight:500}
+
+.photo{position:absolute;inset:0;background-size:cover;background-position:var(--pos,center);transition:transform 1s cubic-bezier(.2,.85,.2,1)}
+.case:hover .photo{transform:scale(1.05)}
+.cases-row{grid-template-columns:minmax(0,1fr) minmax(0,1.18fr) minmax(0,1fr);align-items:end}
+.case.feat .card{box-shadow:0 40px 80px -30px rgba(255,200,0,.25),0 0 0 1px rgba(255,255,255,.1)}
+.card-chip.star{background:var(--lime);color:#0b0c10;backdrop-filter:none}
+.card-logo{position:absolute;top:16px;right:18px;z-index:3;height:22px;aspect-ratio:var(--ar);background:#fff;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+
+/* ---------- BASKET ---------- */
+.exp{padding-bottom:0}
+.exp-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:32px;align-items:center}
+.basket{position:relative;max-width:100%}
+.basket-stage{position:relative;aspect-ratio:1000/640;max-width:100%}
+.basket-stage>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.wire{fill:none;stroke:#d6d8de;stroke-linecap:round}
+.receipt{container-type:inline-size;position:absolute;left:26%;top:19%;width:49%;aspect-ratio:1.42;background:var(--paper);color:#111;transform:rotate(-3.5deg);box-shadow:0 24px 50px rgba(0,0,0,.6);font-family:var(--f-serif);overflow:hidden;z-index:2}
+.receipt .r-year{position:absolute;left:5%;top:2%;font-size:21cqw;line-height:1;font-weight:400;letter-spacing:-.03em}
+.receipt .r-word{position:absolute;left:5%;top:37%;font-size:17cqw;line-height:1;font-weight:400;letter-spacing:-.03em}
+.receipt .r-side{position:absolute;right:4%;top:7%;font-size:6.2cqw;line-height:1;text-align:left;width:30%}
+.receipt .r-by{position:absolute;left:5%;bottom:7%;font-size:5.6cqw;line-height:1.05}
+.receipt .r-by span{display:block}
+.dots{position:absolute;right:5%;bottom:7%;width:22%;aspect-ratio:1.2;display:grid;grid-template-columns:repeat(6,1fr);gap:4%}
+.dots i{border-radius:50%;background:#111;aspect-ratio:1}
+.dots i.x{border-radius:2px;clip-path:polygon(35% 0,65% 0,65% 35%,100% 35%,100% 65%,65% 65%,65% 100%,35% 100%,35% 65%,0 65%,0 35%,35% 35%)}
+.dots i.o{opacity:0}
+.tag{position:absolute;left:var(--x);top:var(--y);transform:rotate(var(--r));z-index:3;border:0;cursor:pointer;background:var(--tb);color:var(--tf);font:700 clamp(10px,1.25vw,16px)/1 var(--f-body);letter-spacing:-.01em;padding:.75em 1.25em;white-space:nowrap;
+  -webkit-mask:radial-gradient(circle .42em at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle .42em at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle .42em at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle .42em at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+  border-radius:4px;transition:transform .35s cubic-bezier(.2,.9,.3,1.4),filter .3s}
+.tag .lg{display:inline-block;height:1.5em;aspect-ratio:var(--ar);background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;vertical-align:middle}
+.tag.logo{display:inline-flex;align-items:center;gap:.5em;padding:.55em 1.3em}
+.tag.logo .lg{height:2em}
+.tag.round{border-radius:.9em;-webkit-mask:none;mask:none;line-height:1.05;padding:.55em .9em;text-align:center}
+.tag:hover,.tag.is-preview{transform:rotate(0deg) scale(1.12);filter:drop-shadow(0 8px 18px rgba(0,0,0,.6))}
+.tag[aria-pressed="true"]{outline:2px solid var(--blue-hi);outline-offset:4px}
+.onsale{position:absolute;right:-1%;top:50%;transform:translateY(-50%) rotate(-90deg) translateX(50%);transform-origin:100% 50%;font-family:var(--f-serif);font-size:clamp(14px,2vw,28px);white-space:nowrap;color:#fff;z-index:3}
+.panel{position:relative;border-radius:24px;padding:32px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);min-height:440px;display:grid;align-content:start;gap:18px;transition:opacity .25s,transform .25s}
+.panel.swap{opacity:.25;transform:translateX(8px)}
+.panel .p-kind{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);display:flex;justify-content:space-between;gap:12px}
+.panel h3{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.panel .p-role{font-weight:500}
+.panel .p-period{color:var(--blue-hi);font-size:14px;font-variant-numeric:tabular-nums}
+.panel ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;color:#c9ccd6;font-size:15px}
+.panel li{padding-left:18px;position:relative}
+.panel li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.panel .p-hint{font-size:12px;color:var(--mute);border-top:1px solid var(--line);padding-top:14px;margin-top:4px}
+.ticker{margin-top:90px;background:var(--lime);color:var(--blue);overflow:hidden;white-space:nowrap;padding-block:10px}
+.ticker-track{display:inline-flex;gap:72px;animation:tick 30s linear infinite;font-size:clamp(22px,2.6vw,34px);line-height:1.1;align-items:baseline}
+.ticker-track span{display:inline-flex;gap:.3em;align-items:baseline}
+.ticker-track i{font-family:var(--f-serif);font-style:italic;font-weight:400}
+.ticker-track b{font-family:var(--f-body);font-weight:700;letter-spacing:-.03em}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- TRAFFIC LIGHT ---------- */
+.skills-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px}
+.tl-sticky{position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));display:grid;place-items:end center;z-index:2}
+.tl-halo{position:absolute;left:50%;top:38%;width:70%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,var(--halo,var(--red)),transparent);opacity:.32;filter:blur(30px);transition:background .6s}
+.tl-svg{position:relative;height:100%;width:100%;max-width:340px}
+.lamp-glow,.lamp-icon-on{opacity:0;transition:opacity .5s}
+.lamp-icon-off{transition:opacity .5s}
+.lamp.on .lamp-glow,.lamp.on .lamp-icon-on{opacity:1}
+.lamp.on .lamp-icon-off{opacity:0}
+.tl-text{display:grid}
+.flag{min-height:78vh;display:grid;align-content:center;gap:20px;opacity:.28;transition:opacity .5s}
+.flag.on{opacity:1}
+.flag-label{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--fc)}
+.flag-label i{width:12px;height:12px;border-radius:50%;background:var(--fc);box-shadow:0 0 14px var(--fc)}
+.flag h3{font-size:clamp(28px,3.4vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.flag ul{list-style:none;padding:0;margin:0;display:grid;gap:12px;color:#c9ccd6;max-width:52ch}
+.flag li{display:grid;grid-template-columns:20px 1fr;gap:6px}
+.flag li::before{content:"—";color:var(--fc)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;max-width:560px}
+.pills span{border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:14px;background:rgba(255,255,255,.03)}
+.flag .big{font-size:clamp(48px,6vw,84px);font-weight:700;letter-spacing:-.05em;line-height:.9;color:var(--fc)}
+
+/* ---------- FOOTER ---------- */
+.foot{background:#000;padding-block:80px 56px}
+.foot-top{border-top:1px solid #1a1a1a;padding-top:64px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.foot h4{font-size:20px;font-weight:500;margin:0 0 22px}
+.foot dl,.foot ul{margin:0;padding:0;list-style:none;display:grid;gap:14px;font-size:14px;color:#a7a9b0}
+.foot dt{color:#fff;font-weight:500}
+.foot dd{margin:0}
+.foot a{text-decoration:none}
+.foot a:hover{color:#fff}
+.foot ul li span{display:block;font-size:12px;color:#5f626b}
+.foot-bot{border-top:1px solid #1a1a1a;margin-top:64px;padding-top:28px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:13px;color:#5f626b}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#1b1c20;color:#fff;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;text-decoration:none}
+.pill:hover{background:#26272c}
+
+/* ---------- RESPONSIVE ---------- */
+/* burger (виден только на телефоне) */
+.burger{display:none;width:44px;height:44px;border:0;border-radius:10px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer;place-items:center;padding:0}
+.burger span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;position:relative;transition:transform .3s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s,top .3s}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.nav.open .burger span{background:transparent}
+.nav.open .burger span::before{top:0;transform:rotate(45deg)}
+.nav.open .burger span::after{top:0;transform:rotate(-45deg)}
+.nav-right{display:flex;align-items:center;gap:10px}
+#tags{position:absolute;inset:0;pointer-events:none}
+#tags .tag{pointer-events:auto}
+
+/* ---------- ПЛАНШЕТ ---------- */
+@media (max-width:1024px){
+  .nav ul{gap:24px}
+  .sec{padding-block:96px}
+  .sec-head{margin-bottom:48px}
+  .cases-row{gap:18px;perspective:1100px}
+  .card-foot{padding:16px}
+  .card-foot p{display:none}
+  .card-chip{top:14px;left:14px}
+  .case-meta{flex-direction:column;gap:2px;font-size:13px}
+  .exp-grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  .panel{min-height:0}
+  .onsale{display:none}
+  .skills-grid{gap:32px}
+  .tl-svg{max-width:260px}
+  .flag{min-height:70vh}
+  .foot-top{gap:28px}
+}
+
+/* ---------- ТЕЛЕФОН ---------- */
+@media (max-width:700px){
+  :root{--nav-h:60px}
+  .nav ul{display:none}
+  .burger{display:grid}
+  .nav .btn{padding:10px 16px}
+  .logo{font-size:13px}
+  .nav.open{background:rgba(0,0,0,.96);bottom:0;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .nav.open nav{display:block}
+  .nav nav{display:none;position:absolute;top:var(--nav-h);left:0;right:0;padding:32px max(16px,env(safe-area-inset-left,0px)) 40px}
+  .nav.open ul{display:grid;gap:8px}
+  .nav.open ul a{display:block;font-size:40px;font-weight:700;letter-spacing:-.04em;padding-block:6px;opacity:1}
+  .sec{padding-block:72px}
+  .sec-head{margin-bottom:32px}
+  .sec-head h2{font-size:36px}
+  .tagline{font-size:14px;bottom:12vh}
+  .hero-meta .wrap{font-size:11px}
+
+  /* кейсы: горизонтальная лента со свайпом */
+  .cases-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:24px max(16px,env(safe-area-inset-left,0px)) 36px;scrollbar-width:none;perspective:900px}
+  .cases-row::-webkit-scrollbar{display:none}
+  .case{flex:0 0 78%;scroll-snap-align:center}
+  .case .card,.case:nth-child(1) .card,.case:nth-child(2) .card,.case:nth-child(3) .card{transform:rotateX(10deg) rotateY(-16deg) scale(.94)}
+  .case.active .card{transform:none;box-shadow:0 40px 70px -30px rgba(47,80,255,.55),0 0 0 1px rgba(255,255,255,.12)}
+  .card-foot p{display:block}
+  .case-meta{flex-direction:row}
+  .swipe-hint{display:flex}
+
+  /* корзина: ценники под корзиной */
+  .basket{margin-inline:-6px}
+  #tags{position:static;display:flex;flex-wrap:wrap;gap:10px 8px;justify-content:center;margin-top:16px}
+  #tags .tag{position:static;font-size:13px}
+  .panel{padding:22px;border-radius:20px}
+  .panel h3{font-size:26px}
+  .ticker{margin-top:64px}
+  .ticker-track{font-size:22px}
+
+  /* светофор */
+  .skills-grid{grid-template-columns:minmax(0,1fr);gap:0}
+  .tl-sticky{height:36vh;background:linear-gradient(var(--bg) 85%,transparent);top:var(--nav-h)}
+  .tl-svg{max-width:150px}
+  .flag{min-height:64vh;gap:16px}
+  .pills span{font-size:13px;padding:6px 12px}
+
+  .foot{padding-block:56px 40px}
+  .foot-top{grid-template-columns:minmax(0,1fr);gap:40px;padding-top:40px}
+  .foot-bot{margin-top:40px}
+}
+.swipe-hint{display:none;justify-content:space-between;font-size:12px;color:var(--mute);letter-spacing:.04em;text-transform:uppercase;margin-top:-8px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .card,.ticker-track{transition:none;animation:none}
+}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#home">Анастасия Самсонова</a>
+    <nav aria-label="Разделы">
+      <ul>
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#cases">Кейсы</a></li>
+        <li><a href="#experience">О себе</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <a class="btn" href="#contacts">Нанять</a>
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-sticky">
+      <img class="hero-poster" id="heroPoster" src="frames/f001.webp" alt="Надувные синие буквы PORTFOLIO" draggable="false">
+      <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <h1 class="tagline">Тот самый дизайнер,<br>который вам нужен</h1>
+      <div class="hero-meta"><div class="wrap"><span>Графический дизайнер</span><span>Листайте ↓</span></div></div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <section class="sec" id="cases">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Кейсы · 2026</p>
+        <h2>Три проекта, которыми я горжусь</h2>
+      </div>
+      <div class="cases-row">
+        <a class="case" href="work.html#guap" aria-label="Кейс ГУАП: айдентика юбилея вуза">
+          <div class="card" style="--cbg:#0f1fd6">
+            <div class="photo" style="background-image:url(img/guap.webp);--pos:62% 50%"></div>
+            <span class="card-chip">Айдентика вуза</span>
+            <i class="card-logo" style="--m:url(img/logo-guap.webp);--ar:1.54;height:30px"></i>
+            <div class="card-foot"><h3>85 лет<br>на орбите</h3><p>Юбилейный знак, гайдбук, паттерн и носители</p></div>
+          </div>
+          <div class="case-meta"><b>ГУАП</b><span>2025</span></div>
+        </a>
+        <a class="case feat" href="work.html#theatre" aria-label="Кейс Новый экспериментальный театр: айдентика">
+          <div class="card" style="--cbg:#000">
+            <div class="photo" style="background-image:url(img/theatre.webp);--pos:50% 50%"></div>
+            <span class="card-chip star">★ Лучший кейс</span>
+            <div class="card-foot"><h3>Айдентика<br>театра</h3><p>Знак-здание, паттерн из кресел, чёрный, белый и жёлтый</p></div>
+          </div>
+          <div class="case-meta"><b>Новый экспериментальный театр</b><span>Волгоград</span></div>
+        </a>
+        <a class="case" href="work.html#bereg" aria-label="Кейс Берег Волги: айдентика ЖК">
+          <div class="card" style="--cbg:#474a56">
+            <div class="photo" style="background-image:url(img/bereg.webp);--pos:28% 50%"></div>
+            <span class="card-chip">Айдентика ЖК</span>
+            <div class="card-foot"><h3>Свет<br>большой воды</h3><p>Знак, где «О» становится солнцем над Волгой</p></div>
+          </div>
+          <div class="case-meta"><b>«Берег Волги»</b><span>ЖК комфорт-класса</span></div>
+        </a>
+      </div>
+      <div class="swipe-hint" aria-hidden="true"><span>Листайте карточки</span><span>→</span></div>
+    </div>
+  </section>
+
+  <!-- BASKET -->
+  <section class="sec exp" id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">О себе · опыт</p>
+        <h2>Распаковываем мой продуктовый опыт</h2>
+        <p>В корзине бренды и команды, с которыми я работала. Наведите или нажмите на ценник, чтобы посмотреть, что я делала.</p>
+      </div>
+      <div class="exp-grid">
+        <div class="basket" id="basket"><div class="basket-stage">
+          <svg viewBox="0 0 1000 640" aria-hidden="true" id="basketSvg"></svg>
+          <div class="receipt" aria-hidden="true">
+            <div class="r-year">(2026)</div>
+            <div class="r-side">графический бренд-дизайн</div>
+            <div class="r-word">портфолио</div>
+            <div class="r-by"><span>by</span><span>Анастасия Самсонова</span></div>
+            <div class="dots" id="dots"></div>
+          </div>
+          <span class="onsale">в продаже: мой опыт</span>
+        </div><div id="tags"></div></div>
+        <aside class="panel" id="panel" aria-live="polite"></aside>
+      </div>
+    </div>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+  </section>
+
+  <!-- TRAFFIC LIGHT -->
+  <section class="sec" id="skills">
+    <div class="wrap skills-grid">
+      <div class="tl-col">
+        <div class="tl-sticky">
+          <div class="tl-halo" id="halo"></div>
+          <svg class="tl-svg" viewBox="0 0 300 900" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+            <defs>
+              <linearGradient id="body" x1="0" x2="1"><stop offset="0" stop-color="#2a2d35"/><stop offset=".5" stop-color="#16181e"/><stop offset="1" stop-color="#0a0b0e"/></linearGradient>
+              <radialGradient id="lens" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#1d2027"/><stop offset="1" stop-color="#050608"/></radialGradient>
+              <radialGradient id="gR" cx=".45" cy=".4" r=".65"><stop offset="0" stop-color="#ff6b7a"/><stop offset=".6" stop-color="#b3101f"/><stop offset="1" stop-color="#3a0309"/></radialGradient>
+              <radialGradient id="gY" cx=".45" cy=".4" r=".65"><stop offset="0" stop-color="#ffd36a"/><stop offset=".6" stop-color="#c47a00"/><stop offset="1" stop-color="#3a2400"/></radialGradient>
+              <radialGradient id="gG" cx=".45" cy=".4" r=".65"><stop offset="0" stop-color="#7bffb4"/><stop offset=".6" stop-color="#0f9a4c"/><stop offset="1" stop-color="#03301a"/></radialGradient>
+              <pattern id="stripes" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><rect width="40" height="40" fill="#111"/><rect width="20" height="40" fill="#f5c400"/></pattern>
+              <linearGradient id="poleShade" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient>
+              <filter id="neon" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <ellipse cx="150" cy="886" rx="120" ry="12" fill="#111" opacity=".9"/>
+            <ellipse cx="150" cy="878" rx="62" ry="12" fill="#1c1e24"/>
+            <rect x="96" y="866" width="108" height="12" fill="#1c1e24"/>
+            <ellipse cx="150" cy="866" rx="54" ry="10" fill="#2b2e36"/>
+            <rect x="133" y="560" width="34" height="310" fill="url(#stripes)"/>
+            <rect x="133" y="560" width="34" height="310" fill="url(#poleShade)"/>
+            <rect x="58" y="30" width="184" height="540" rx="42" fill="url(#body)" stroke="#33363f" stroke-width="2"/>
+            <rect x="70" y="42" width="160" height="516" rx="34" fill="none" stroke="#000" stroke-opacity=".4" stroke-width="2"/>
+            <g transform="translate(222 528) rotate(-12)"><circle r="22" fill="#2f50ff"/><text text-anchor="middle" y="6" font-family="Inter,Arial,sans-serif" font-weight="700" font-size="15" fill="#fff">АС</text></g>
+            <g class="lamp" data-i="0" transform="translate(150 140)">
+              <path d="M-74 -18 A74 74 0 0 1 74 -18 L64 -66 Q0 -96 -64 -66 Z" fill="#0b0c0f"/>
+              <circle r="62" fill="#08090b"/><circle r="56" fill="url(#lens)"/>
+              <circle class="lamp-glow" r="56" fill="url(#gR)"/>
+              <g class="lamp-icon-off" fill="#3a1218"><path d="M0,30 C-36,6 -40,-17 -25,-28 C-13,-36 -2,-30 0,-19 C2,-30 13,-36 25,-28 C40,-17 36,6 0,30Z"/></g>
+              <g class="lamp-icon-on" fill="#ffe0e4" filter="url(#neon)"><path d="M0,30 C-36,6 -40,-17 -25,-28 C-13,-36 -2,-30 0,-19 C2,-30 13,-36 25,-28 C40,-17 36,6 0,30Z"/></g>
+              <ellipse cx="-20" cy="-30" rx="22" ry="10" fill="#fff" opacity=".12" transform="rotate(-25)"/>
+            </g>
+            <g class="lamp" data-i="1" transform="translate(150 300)">
+              <path d="M-74 -18 A74 74 0 0 1 74 -18 L64 -66 Q0 -96 -64 -66 Z" fill="#0b0c0f"/>
+              <circle r="62" fill="#08090b"/><circle r="56" fill="url(#lens)"/>
+              <circle class="lamp-glow" r="56" fill="url(#gY)"/>
+              <g class="lamp-icon-off" fill="none" stroke="#3a2a08" stroke-width="7" stroke-linecap="round"><path d="M-14 -16 v12 M14 -16 v12"/><path d="M-24 8 Q0 32 24 8"/></g>
+              <g class="lamp-icon-on" fill="none" stroke="#fff3d0" stroke-width="7" stroke-linecap="round" filter="url(#neon)"><path d="M-14 -16 v12 M14 -16 v12"/><path d="M-24 8 Q0 32 24 8"/></g>
+              <ellipse cx="-20" cy="-30" rx="22" ry="10" fill="#fff" opacity=".12" transform="rotate(-25)"/>
+            </g>
+            <g class="lamp" data-i="2" transform="translate(150 460)">
+              <path d="M-74 -18 A74 74 0 0 1 74 -18 L64 -66 Q0 -96 -64 -66 Z" fill="#0b0c0f"/>
+              <circle r="62" fill="#08090b"/><circle r="56" fill="url(#lens)"/>
+              <circle class="lamp-glow" r="56" fill="url(#gG)"/>
+              <g class="lamp-icon-off" fill="#0f3320"><circle cx="0" cy="-15" r="13"/><circle cx="15" cy="0" r="13"/><circle cx="0" cy="15" r="13"/><circle cx="-15" cy="0" r="13"/><path d="M4 12 Q12 26 22 32" stroke="#0f3320" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+              <g class="lamp-icon-on" fill="#dcffe9" filter="url(#neon)"><circle cx="0" cy="-15" r="13"/><circle cx="15" cy="0" r="13"/><circle cx="0" cy="15" r="13"/><circle cx="-15" cy="0" r="13"/><path d="M4 12 Q12 26 22 32" stroke="#dcffe9" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+              <ellipse cx="-20" cy="-30" rx="22" ry="10" fill="#fff" opacity=".12" transform="rotate(-25)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="tl-text">
+        <div class="sec-head" style="margin-bottom:0;padding-top:40px">
+          <p class="eyebrow">Навыки</p>
+          <h2>Красный, жёлтый, зелёный: можно нанимать</h2>
+          <p>Мои «флаги» на светофоре. Листайте, и он переключится.</p>
+        </div>
+        <article class="flag on" data-i="0" style="--fc:var(--red)">
+          <span class="flag-label"><i></i>Hard skills</span>
+          <h3>Руки, которые знают инструменты</h3>
+          <div class="pills"><span>Adobe Illustrator</span><span>Photoshop</span><span>InDesign</span><span>After Effects</span><span>Figma</span><span>Blender 3D</span><span>CorelDRAW</span><span>Графический планшет</span></div>
+          <ul>
+            <li>Айдентика, логотипы и брендбуки</li>
+            <li>Дизайн упаковки и подготовка к печати с учётом требований типографии</li>
+            <li>Карточки товаров с инфографикой для маркетплейсов</li>
+            <li>3D-визуализация и базовая анимация логотипов</li>
+          </ul>
+        </article>
+        <article class="flag" data-i="1" style="--fc:var(--amber)">
+          <span class="flag-label"><i></i>Soft skills</span>
+          <h3>Со мной спокойно работать</h3>
+          <ul>
+            <li>Веду несколько задач параллельно и держу сроки</li>
+            <li>Согласую концепции с маркетингом и руководством</li>
+            <li>Спокойно принимаю правки и дорабатываю макет по обратной связи</li>
+            <li>Сама общаюсь с типографией, производством и подрядчиками</li>
+            <li>Быстро вникаю в новую отрасль: food, производство, образование, e-com</li>
+          </ul>
+        </article>
+        <article class="flag" data-i="2" style="--fc:var(--green)">
+          <span class="flag-label"><i></i>Зелёный свет</span>
+          <h3>Почему я вам подхожу лучше всех</h3>
+          <p class="big">×2</p>
+          <ul>
+            <li>Мои карточки по итогам CTR-тестов принесли в 2 раза больше продаж</li>
+            <li>Полный цикл: от логотипа и стиля до упаковки на полке</li>
+            <li>Опыт с международными площадками: Trendyol и Hepsiburada</li>
+            <li>Работала и в агентстве, и в продакшене, и в e-commerce</li>
+            <li>Готова к удалёнке и командировкам</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="contacts">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <h4>Локация</h4>
+        <ul>
+          <li>Волгоград, Россия</li>
+          <li>Доступна для удалённых проектов по всему миру</li>
+          <li>Готова к командировкам</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Образование</h4>
+        <dl>
+          <div><dt>ВГСПУ</dt><dd>Экономический факультет<br>Управление человеческими ресурсами<br>2028</dd></div>
+          <div><dt>Логомашина</dt><dd>Брендинг и айдентика<br>2026</dd></div>
+          <div><dt>Contented</dt><dd>Графический дизайн<br>2025</dd></div>
+          <div><dt>NewArtSchool</dt><dd>2D рисунок, концепт-художник<br>2027</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+79370972700">+7 (937) 097-27-00</a><span>предпочитаемый способ связи</span></li>
+          <li><a href="mailto:samonavox@yandex.ru">samonavox@yandex.ru</a></li>
+          <li><a href="https://t.me/samonavox" target="_blank" rel="noopener">Telegram · @samonavox</a></li>
+          <li><a href="https://www.instagram.com/samonavox" target="_blank" rel="noopener">Instagram · @samonavox</a></li>
+          <li><a href="https://www.behance.net/8275fb94" target="_blank" rel="noopener">Behance</a></li>
+          <li><a href="https://set.ki/account/Zap5WUy" target="_blank" rel="noopener">Сетка</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <a class="pill" href="https://t.me/samonavox" target="_blank" rel="noopener">Написать в Telegram ↗</a>
+      <span>© 2026 Анастасия Самсонова</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+  const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+
+  /* ---------- HERO: кадры видео привязаны к скроллу ---------- */
+  const hero=document.querySelector('.hero');
+  const cv=document.getElementById('heroCanvas'), ctx=cv.getContext('2d');
+  const N=121, frames=new Array(N);
+  let cur=-1, target=0, smooth=0, loopOn=false;
+  const src=i=>`frames/f${String(i+1).padStart(3,'0')}.webp`;
+  function load(i){if(frames[i])return;const im=new Image();im.decoding='async';im.src=src(i);im.onload=()=>{im.ok=true;if(i===0){sizeCanvas();cv.classList.add('ready')}if(Math.abs(i-Math.round(smooth))<2)paint(true)};frames[i]=im}
+  // сначала каждый 8-й кадр, затем остальные
+  for(let i=0;i<N;i+=8)load(i);load(N-1);
+  setTimeout(()=>{for(let i=0;i<N;i++)load(i)},150);
+  function sizeCanvas(){const d=Math.min(devicePixelRatio||1,2);cv.width=Math.round(cv.clientWidth*d);cv.height=Math.round(cv.clientHeight*d);cur=-1;paint(true)}
+  function nearest(i){for(let k=0;k<N;k++){if(frames[i-k]&&frames[i-k].ok)return frames[i-k];if(frames[i+k]&&frames[i+k].ok)return frames[i+k]}return null}
+  function paint(force){
+    const i=Math.round(smooth);
+    if(i===cur&&!force)return;
+    const im=nearest(i);if(!im)return;cur=i;
+    const W=cv.width,H=cv.height,iw=im.naturalWidth,ih=im.naturalHeight;
+    let s=Math.max(W/iw,H/ih);
+    if(W/H<1)s=(W/iw)*1.5; // портрет: буквы крупнее, края обрезаются
+    const dw=iw*s,dh=ih*s;
+    ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+    ctx.drawImage(im,(W-dw)/2,(H-dh)/2,dw,dh);
+  }
+  function loop(){
+    smooth+= (target-smooth)*0.18;
+    if(Math.abs(target-smooth)<.05)smooth=target;
+    paint();
+    if(smooth!==target)requestAnimationFrame(loop);else loopOn=false;
+  }
+  function drawHero(){
+    const r=hero.getBoundingClientRect();
+    const p=reduce?0:clamp(-r.top/(r.height-innerHeight));
+    target=p*(N-1);
+    if(!loopOn){loopOn=true;requestAnimationFrame(loop)}
+  }
+  addEventListener('resize',sizeCanvas);
+
+  /* ---------- TRAFFIC LIGHT ---------- */
+  const flags=[...document.querySelectorAll('.flag')];
+  const lamps=[...document.querySelectorAll('.lamp')];
+  const halo=document.getElementById('halo');
+  const haloColors=['var(--red)','var(--amber)','var(--green)'];
+  let activeFlag=-1;
+  function setFlag(i){
+    if(i===activeFlag)return;activeFlag=i;
+    flags.forEach((f,j)=>f.classList.toggle('on',j===i));
+    lamps.forEach((l,j)=>l.classList.toggle('on',j===i));
+    halo.style.setProperty('--halo',haloColors[i]);
+  }
+  function drawFlags(){
+    const mid=innerWidth<=700?innerHeight*.68:innerHeight*.5;
+    let best=0,bd=1e9;
+    flags.forEach((f,i)=>{const r=f.getBoundingClientRect();const d=Math.abs(r.top+r.height/2-mid);if(d<bd){bd=d;best=i}});
+    setFlag(best);
+  }
+  function tick(){drawHero();drawFlags()}
+  let raf=0;
+  addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;tick()})},{passive:true});
+  addEventListener('resize',()=>{last=-1;tick()});
+  setFlag(0);tick();
+
+  /* ---------- BASKET (вид сверху) ---------- */
+  const svg=document.getElementById('basketSvg');
+  function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);(parent||svg).appendChild(e);return e}
+  const defs=el('defs',{});
+  const sg=el('linearGradient',{id:'silver',x1:0,y1:0,x2:0,y2:1},defs);
+  [['0','#f4f5f8'],['.5','#8d9099'],['1','#e2e4ea']].forEach(([o,c])=>el('stop',{offset:o,'stop-color':c},sg));
+  const R={x1:90,y1:58,x2:910,y2:582}, F={x1:250,y1:185,x2:750,y2:455};
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  const W=g=>el('line',Object.assign({class:'wire','stroke-width':2.4},g));
+  // стенки
+  const nH=22,nV=13;
+  for(let i=0;i<=nH;i++){const t=i/nH;
+    W({x1:lerp(R.x1+30,R.x2-30,t),y1:R.y1+8,x2:lerp(F.x1,F.x2,t),y2:F.y1});
+    W({x1:lerp(R.x1+30,R.x2-30,t),y1:R.y2-8,x2:lerp(F.x1,F.x2,t),y2:F.y2});}
+  for(let j=0;j<=nV;j++){const t=j/nV;
+    W({x1:R.x1+8,y1:lerp(R.y1+30,R.y2-30,t),x2:F.x1,y2:lerp(F.y1,F.y2,t)});
+    W({x1:R.x2-8,y1:lerp(R.y1+30,R.y2-30,t),x2:F.x2,y2:lerp(F.y1,F.y2,t)});}
+  // горизонтальные кольца стенок
+  [.35,.68].forEach(t=>el('rect',{x:lerp(R.x1,F.x1,t),y:lerp(R.y1,F.y1,t),width:lerp(R.x2,F.x2,t)-lerp(R.x1,F.x1,t),height:lerp(R.y2,F.y2,t)-lerp(R.y1,F.y1,t),rx:lerp(30,6,t),class:'wire','stroke-width':2.4}));
+  // дно
+  for(let i=1;i<nH;i++){const x=lerp(F.x1,F.x2,i/nH);W({x1:x,y1:F.y1,x2:x,y2:F.y2,'stroke-width':1.8,'stroke-opacity':.8})}
+  for(let j=1;j<9;j++){const y=lerp(F.y1,F.y2,j/9);W({x1:F.x1,y1:y,x2:F.x2,y2:y,'stroke-width':1.8,'stroke-opacity':.8})}
+  el('rect',{x:F.x1,y:F.y1,width:F.x2-F.x1,height:F.y2-F.y1,rx:6,class:'wire','stroke-width':3.5});
+  // обод
+  el('rect',{x:R.x1,y:R.y1,width:R.x2-R.x1,height:R.y2-R.y1,rx:34,fill:'none',stroke:'#1e1f23','stroke-width':22});
+  el('rect',{x:R.x1-8,y:R.y1-8,width:R.x2-R.x1+16,height:R.y2-R.y1+16,rx:40,fill:'none',stroke:'#4a4c53','stroke-width':2});
+  el('rect',{x:R.x1+9,y:R.y1+9,width:R.x2-R.x1-18,height:R.y2-R.y1-18,rx:26,fill:'none',stroke:'#0a0a0b','stroke-width':3});
+  // ручки с металлическими клипсами
+  [[R.y1,-1],[R.y2,1]].forEach(([y,s])=>{
+    el('rect',{x:300,y:y-9,width:400,height:18,rx:9,fill:'#141417',stroke:'#3c3e44','stroke-width':1.5});
+    el('rect',{x:310,y:y-6,width:380,height:4,rx:2,fill:'#fff','fill-opacity':.12});
+    [330,670].forEach(x=>{
+      el('rect',{x:x-26,y:y-15,width:52,height:30,rx:12,fill:'none',stroke:'url(#silver)','stroke-width':7});
+      el('rect',{x:x-12,y:y-4,width:24,height:8,rx:4,fill:'url(#silver)'});
+    });
+  });
+
+  // точки/кресты на чеке
+  const dots=document.getElementById('dots');
+  const pat='o x . o . x . . x . o . x . . o . . . o . x . . . . x o . .'.split(' ');
+  pat.forEach(c=>{const i=document.createElement('i');if(c==='x')i.className='x';if(c==='o')i.className='o';dots.appendChild(i)});
+
+  const brands=[
+    {id:'nbv',name:'НБВ',full:'НБВ',x:'4%',y:'15%',r:'-4deg',tb:'#fff',tf:'#0b0c10',round:true,label:'НБВ<br>агентство',kind:'Брендинговое агентство · Волгоград',period:'Февраль — август 2026 · 7 месяцев',role:'Графический дизайнер',items:['Комплексная упаковка брендов под ключ: фирменный стиль, логотип, носители','Упаковка продукции и визуал для производства, образования и food','Презентации концепций и правки по обратной связи клиентов','Наружная реклама, баннеры, брошюры, стенды и допечатная подготовка']},
+    {id:'vois',name:'VOIS',full:'VOIS',x:'4%',y:'31%',r:'3deg',tb:'#fff',tf:'#2f50ff',logo:'img/logo-vois.webp',ar:4.66,kind:'Упаковка · beauty',period:'2025',role:'Айдентика и упаковка',items:['Линейка бальзамов для губ трёх вкусов: вишня, ваниль, масло ши','Графический мотив тающей глазури','Кампания с девушкой и бальзамом','Развёртка коробки и носители бренда']},
+    {id:'guap',name:'ГУАП',full:'ГУАП · 85 лет',x:'0%',y:'50%',r:'-4deg',tb:'#1f3fe0',tf:'#fff',logo:'img/logo-guap.webp',ar:1.54,kind:'Айдентика вуза · образование',period:'2025',role:'Графический дизайнер',items:['Юбилейный знак к 85-летию университета','Гайдбук, палитра, шрифт Jura и слоганы','Фирменный хештег #гуап85 и паттерн','Носители: флаги, мерч, сертификаты, кружки']},
+    {id:'grass',name:'GRASS',full:'GRASS',x:'72%',y:'4%',r:'0deg',tb:'#1f1fe0',tf:'#fff',kind:'E-commerce · международное направление',period:'Февраль 2025 — февраль 2026 · 1 год 1 месяц',role:'Дизайнер e-commerce',items:['Карточки товаров с инфографикой для маркетплейсов и интернет-магазинов','CTR-тесты обложек и карточек: мои карточки принесли в 2 раза больше продаж','Сайты для международных площадок Trendyol и Hepsiburada','Визуал под локальную аудиторию, презентации для бизнеса']},
+    {id:'bereg',name:'Берег Волги',full:'«Берег Волги»',x:'77%',y:'17%',r:'-9deg',tb:'#d8ff3c',tf:'#1f1fe0',logo:'img/logo-bereg.webp',ar:1.98,kind:'Айдентика ЖК · комфорт-класс',period:'Волгоград',role:'Графический дизайнер',items:['Шрифтовой знак, где «О» становится солнцем над водой','Палитра графит, серый и молочный','Гайдбук, презентация и носители','Наружная реклама и вывески']},
+    {id:'geroy',name:'Герои поколений',full:'«Герои поколений»',x:'62%',y:'80%',r:'4deg',tb:'#fff',tf:'#d0101c',logo:'img/logo-geroy.webp',ar:.9,text:'Герои поколений',kind:'Айдентика ЖК · Волгоград',period:'2025',role:'Графический дизайнер',items:['Знак-монограмма «Гп» и паттерн','Палитра с красным акцентом','Гайдбук и оформление Instagram','Продающая презентация на 30 слайдов']}
+  ];
+  const basket=document.getElementById('basket'), panel=document.getElementById('panel'), tagBox=document.getElementById('tags');
+  let pinned='nbv', shown='';
+  const tags={};
+  brands.forEach(b=>{
+    const t=document.createElement('button');
+    t.className='tag'+(b.round?' round':'')+(b.logo?' logo':'');t.type='button';
+    t.style.cssText=`--x:${b.x};--y:${b.y};--r:${b.r};--tb:${b.tb};--tf:${b.tf}`;
+    t.innerHTML=b.logo?`<i class="lg" style="--m:url(${b.logo});--ar:${b.ar}"></i>${b.text?`<span>${b.text}</span>`:''}`:(b.label||b.name);
+    t.setAttribute('aria-pressed',b.id===pinned);
+    t.setAttribute('aria-label',b.full);
+    t.addEventListener('mouseenter',()=>show(b.id,true));
+    t.addEventListener('focus',()=>show(b.id,true));
+    t.addEventListener('click',()=>{pinned=b.id;Object.values(tags).forEach(x=>x.setAttribute('aria-pressed',x===t));show(b.id)});
+    tagBox.appendChild(t);tags[b.id]=t;
+  });
+  basket.addEventListener('mouseleave',()=>show(pinned));
+  function render(b,preview){
+    panel.innerHTML=`<div class="p-kind"><span>${b.kind}</span><span>${preview?'просмотр':'закреплено'}</span></div>
+      <h3>${b.full}</h3>
+      <div><p class="p-role">${b.role}</p><p class="p-period">${b.period}</p></div>
+      <ul>${b.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+      <p class="p-hint">Наведите на другой ценник или нажмите, чтобы закрепить.</p>`;
+  }
+  let swapT;
+  function show(id,preview){
+    Object.entries(tags).forEach(([k,t])=>t.classList.toggle('is-preview',!!preview&&k===id));
+    const key=id+(preview?'p':'');
+    if(key===shown)return;shown=key;
+    const b=brands.find(x=>x.id===id);
+    if(reduce){render(b,preview);return}
+    panel.classList.add('swap');clearTimeout(swapT);
+    swapT=setTimeout(()=>{render(b,preview);panel.classList.remove('swap')},140);
+  }
+  render(brands[0],false);shown='nbv';
+
+  const nav=document.querySelector('.nav'), burger=document.getElementById('burger');
+  burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Закрыть меню':'Открыть меню');document.body.style.overflow=o?'hidden':''});
+  nav.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
+  const row=document.querySelector('.cases-row'), cases=[...row.querySelectorAll('.case')];
+  function activeCase(){
+    if(innerWidth>700){cases.forEach(c=>c.classList.remove('active'));return}
+    const mid=row.getBoundingClientRect().left+row.clientWidth/2;let best=null,bd=1e9;
+    cases.forEach(c=>{const r=c.getBoundingClientRect();const d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=c}});
+    cases.forEach(c=>c.classList.toggle('active',c===best));
+  }
+  row.addEventListener('scroll',()=>requestAnimationFrame(activeCase),{passive:true});
+  addEventListener('resize',activeCase);activeCase();
+  document.getElementById('ticker').innerHTML='<span><i>мой</i><b>продуктовый дизайн</b></span>'.repeat(8);
+})();
+</script>
+
+</body></html>
